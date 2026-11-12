@@ -1,8 +1,8 @@
 
 import { test, expect } from '@playwright/test';
-import LoginPage from '../pages/loginpage';
+import LoginPage from '../pages/LoginPage';
 
-const loginData = require('../test-data/loginData.json');
+import loginData from '../test-data/loginData.json';
 
 test.describe('Nextenti Candidate Login Tests', () => {
 
