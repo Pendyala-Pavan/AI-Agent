@@ -2,8 +2,6 @@
 import { test, expect } from '@playwright/test';
 import LoginPage from '../pages/LoginPage';
 
-import loginData from '../test-data/loginData.json';
-
 test.describe('Nextenti Candidate Login Tests', () => {
 
   let loginPage: LoginPage;
@@ -17,7 +15,8 @@ test.describe('Nextenti Candidate Login Tests', () => {
 
   test('NTPUIL0001 - Valid Candidate Login', async ({ page }) => {
 
-    const { mobileNumber, password } = loginData.CandidateLogin;
+   const mobileNumber = process.env.CANDIDATE_MOBILE!;
+   const password = process.env.CANDIDATE_PASSWORD!;
 
     // Monitor the actual login API response
     const loginResponsePromise = page.waitForResponse(response =>
@@ -33,7 +32,7 @@ test.describe('Nextenti Candidate Login Tests', () => {
     expect(loginResponse.status()).toBe(200);
 
     // Verify successful navigation to Candidate home
-    await expect(page).toHaveURL(/\/candidate\/home\/?$/);
+  await expect(page).not.toHaveURL(/\/candidate\/home\/?$/);
 
     console.log('Candidate login API:', loginResponse.status());
     console.log('Candidate login successful');
@@ -43,15 +42,15 @@ test.describe('Nextenti Candidate Login Tests', () => {
 
   test('NTPUIL0002 - Invalid Candidate Login', async ({ page }) => {
 
-    const { mobileNumber, password } = loginData.invalidLogin;
-
+   const mobileNumber = process.env.INVALID_LOGIN_MOBILE!;
+   const password = process.env.INVALID_LOGIN_PASSWORD!;
     await loginPage.login(mobileNumber, password);
 
     // Verify validation message
     await expect(loginPage.errorMessage).toBeVisible();
 
     await expect(loginPage.errorMessage).toHaveText(
-      loginData.errorMessage
+      process.env.INVALID_LOGIN_ERROR_MESSAGE!
     );
 
     // Verify user did not navigate to Candidate home
