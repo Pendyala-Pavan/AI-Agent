@@ -28,9 +28,12 @@ class LoginPage {
     );
   }
 
-  async navigateToLogin(): Promise<void> {
-    await this.page.goto('/');
-  }
+ async navigateToLogin(): Promise<void> {
+  await this.page.goto('/', {
+    waitUntil: 'domcontentloaded',
+    timeout: 60000
+  });
+}
 
   async clickLoginIcon(): Promise<void> {
     await this.loginicon.click();
