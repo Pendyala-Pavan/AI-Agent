@@ -1,0 +1,30 @@
+
+{
+  "name": "nextenti-ai-qa-agent",
+  "version": "1.0.0",
+  "description": "AI-powered QA automation agent for Nextenti Talent Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:qa": "playwright test --project=chromium",
+    "test:headed": "playwright test --headed --project=chromium",
+    "test:regression": "playwright test tests --project=chromium",
+    "report": "playwright show-report reports/html-report"
+  },
+  "keywords": [
+    "playwright",
+    "typescript",
+    "qa-automation",
+    "ai-testing-agent"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.10"
+  }
+}

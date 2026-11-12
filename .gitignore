@@ -1,0 +1,32 @@
+
+# Dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Test credentials
+test-data/loginData.json
+
+# Test reports
+reports/
+playwright-report/
+test-results/
+
+# Playwright cache
+playwright/.cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
