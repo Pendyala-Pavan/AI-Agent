@@ -28,10 +28,11 @@ jobs:
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
-      - name: Check QA Website Accessibility
-        run: |
-          curl -4 -Iv --connect-timeout 15 --max-time 30 https://k8-qa-job-web.nextenti.ai/
 
+      - name: Check QA Website on Port 80
+        run: |
+         curl -I --connect-timeout 15 --max-time 30 http://k8-qa-job-web.nextenti.ai/
+         
       - name: Run Candidate Login Tests
         run: npx playwright test tests/candidate-login.spec.ts --project=chromium
         env:
