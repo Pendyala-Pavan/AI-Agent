@@ -43,6 +43,26 @@ jobs:
           INVALID_LOGIN_PASSWORD: ${{ secrets.INVALID_LOGIN_PASSWORD }}
           INVALID_LOGIN_ERROR_MESSAGE: ${{ secrets.INVALID_LOGIN_ERROR_MESSAGE }}
 
+      - name: Generate Email Summary
+        id: email_summary
+        if: always()
+        shell: powershell
+        run: node scripts/generate-email-summary.cjs
+
+      - name: Send Email Report
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_APP_PASSWORD }}
+          subject: Nextenti QA Automation - Playwright Test Report
+          to: pendyalapavan01@gmail.com
+          from: Nextenti QA Automation <${{ secrets.MAIL_USERNAME }}>
+          body: ${{ steps.email_summary.outputs.body }}
+
       - name: Upload Playwright Reports
         if: always()
         uses: actions/upload-artifact@v4

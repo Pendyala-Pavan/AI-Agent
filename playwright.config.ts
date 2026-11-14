@@ -24,13 +24,18 @@ export default defineConfig({
   },
 
   // Reports
-  reporter: [
-    ['list'],
-    ['html', {
-      outputFolder: 'reports/html-report',
-      open: 'never',
-    }],
-  ],
+reporter: [
+  ['list'],
+
+  ['html', {
+    outputFolder: 'reports/html-report',
+    open: 'never',
+  }],
+
+  ['json', {
+    outputFile: 'reports/test-results/results.json',
+  }],
+],
 
   // Shared browser settings
   use: {
