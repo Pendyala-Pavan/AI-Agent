@@ -32,7 +32,7 @@ jobs:
       - name: Check QA Website on Port 80
         shell: powershell
         run: |
-         curl -I --connect-timeout 15 --max-time 30 http://k8-qa-job-web.nextenti.ai/
+         curl.exe -I --connect-timeout 15 --max-time 30 http://k8-qa-job-web.nextenti.ai/
 
       - name: Run Candidate Login Tests
         run: npx playwright test tests/candidate-login.spec.ts --project=chromium
