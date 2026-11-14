@@ -30,6 +30,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Check QA Website on Port 80
+        shell: powershell
         run: |
          curl -I --connect-timeout 15 --max-time 30 http://k8-qa-job-web.nextenti.ai/
 
