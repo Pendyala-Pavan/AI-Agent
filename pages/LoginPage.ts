@@ -12,9 +12,10 @@ class LoginPage {
   constructor(page: Page) {
     this.page = page;
 
-    this.loginicon = page.locator(
-      '.bg-darkblue7.px-3.py-1.hover-scale.text-white.rounded-3xl'
-    );
+    this.loginicon = page.getByRole('button', {
+  name: 'Login',
+  exact: true
+});
 
     this.usernameField = page.locator('#loginId');
     this.passwordField = page.locator('#password');
@@ -35,9 +36,10 @@ class LoginPage {
   });
 }
 
-  async clickLoginIcon(): Promise<void> {
-    await this.loginicon.click();
-  }
+ async clickLoginIcon(): Promise<void> {
+  await this.loginicon.waitFor({ state: 'visible' });
+  await this.loginicon.click();
+}
 
   async login(
     mobileNumber: string,
